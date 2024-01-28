@@ -1,7 +1,18 @@
-#!/usr/bin/python3
-FILE=$1
-while read NUMBERS;
-do
-	factors=($(factor $NUMBERS))
-	echo "$NUMBERS=$(($NUMBERS/${factors[0]}))*${factors[0]}"
-done < $FILE
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "USAGE: $0 <FILE>"
+    exit 1
+fi
+
+FILE="$1"
+
+while read -r NUMBERS; do
+
+    factors=($(factor "$NUMBERS"))
+
+    factor1=${factors[-2]}
+    factor2=${factors[-1]}
+
+    echo "$NUMBERS=$factor1*$factor2"
+done < "$FILE"
