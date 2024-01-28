@@ -1,19 +1,18 @@
-#!/usr/bin/python3
+#!/bin/bash
 
-import sys
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <file>"
+    exit 1
+fi
 
-if len(sys.argv) != 2:
-	print("Usage: {} <file>".format(sys.argv[0]))
-	sys.exit(1)
+FILE="$1"
 
-file_name = sys.argv[1]
+while read -r NUMBER; do
 
-with open(file_name, 'r') as file:
-	for line in file:
-		number = int(line.strip())
-		factors = [int(factor) for factor in str(number).split()]
+    factors=($)factor "$NUMBER"))
 
-		factor1 = factors[-2]
-		factor2 = factors[-1]
+    factor1=${factors[-2]}
+    factor2=${factors[-1]}
 
-		print("{}={}*{}".format(number, factor1, factor2))
+    echo "$NUMBER=$factor1*$factor2"
+done < "$FILE"
